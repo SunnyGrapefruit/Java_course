@@ -57,35 +57,30 @@ public class Domain_model {
     }
 
     public static class Car extends GroundTransport{
-
         public void breakdown() {
             System.out.println("Машина сломалась!");
         }
     }
 
     public static class Motorcycle extends GroundTransport{
-
         public void breakdown() {
             System.out.println("Мотоцикл сломался!");
         }
     }
 
     public static class Bike extends GroundTransport{
-
         public void breakdown() {
             System.out.println("Велосипед сломался!");
         }
     }
 
     public static class Airplane extends AirTransport{
-
         public void breakdown() {
             System.out.println("Самолет падает!");
         }
     }
 
     public static class Helicopter extends AirTransport{
-
         public void breakdown() {
             System.out.println("Вертолет падает!");
         }
@@ -99,28 +94,24 @@ public class Domain_model {
             this.name = name;
         }
 
-
         public void breakdown() {
             System.out.println("Почему мы видим дирижабль!");
         }
     }
 
     public static class Ship extends WaterTransport{
-
         public void breakdown() {
             System.out.println("Лодка тонет!");
         }
     }
 
     public static class Yacht extends WaterTransport{
-
         public void breakdown() {
             System.out.println("Яхта тонет!");
         }
     }
 
     public static class Barge extends WaterTransport{
-
         public void breakdown() {
             System.out.println("Баржа тонет!");
         }
