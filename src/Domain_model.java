@@ -4,7 +4,7 @@ public class Domain_model {
         public void move();
     }
 
-    abstract static class Ground implements Transport{
+    abstract static class GroundTransport implements Transport{
 
         private String model;
         private String color;
@@ -22,7 +22,7 @@ public class Domain_model {
         public abstract void breakdown();
     }
 
-    abstract static class Air implements Transport{
+    abstract static class AirTransport implements Transport{
 
         private String model;
         private int places;
@@ -39,7 +39,7 @@ public class Domain_model {
         public abstract void breakdown();
     }
 
-    abstract static class Water implements Transport{
+    abstract static class WaterTransport implements Transport{
 
         private String model;
         private int motorPower;
@@ -56,42 +56,42 @@ public class Domain_model {
         public abstract void breakdown();
     }
 
-    public static class Car extends Ground{
-        @Override
+    public static class Car extends GroundTransport{
+
         public void breakdown() {
             System.out.println("Машина сломалась!");
         }
     }
 
-    public static class Motorcycle extends Ground{
-        @Override
+    public static class Motorcycle extends GroundTransport{
+
         public void breakdown() {
             System.out.println("Мотоцикл сломался!");
         }
     }
 
-    public static class Bike extends Ground{
-        @Override
+    public static class Bike extends GroundTransport{
+
         public void breakdown() {
             System.out.println("Велосипед сломался!");
         }
     }
 
-    public static class Airplane extends Air{
-        @Override
+    public static class Airplane extends AirTransport{
+
         public void breakdown() {
             System.out.println("Самолет падает!");
         }
     }
 
-    public static class Helicopter extends Air{
-        @Override
+    public static class Helicopter extends AirTransport{
+
         public void breakdown() {
             System.out.println("Вертолет падает!");
         }
     }
 
-    public static class Airship extends Air{
+    public static class Airship extends AirTransport{
 
         private String name;
 
@@ -99,28 +99,28 @@ public class Domain_model {
             this.name = name;
         }
 
-        @Override
+
         public void breakdown() {
             System.out.println("Почему мы видим дирижабль!");
         }
     }
 
-    public static class Ship extends Water{
-        @Override
+    public static class Ship extends WaterTransport{
+
         public void breakdown() {
             System.out.println("Лодка тонет!");
         }
     }
 
-    public static class Yacht extends Water{
-        @Override
+    public static class Yacht extends WaterTransport{
+
         public void breakdown() {
             System.out.println("Яхта тонет!");
         }
     }
 
-    public static class Barge extends Water{
-        @Override
+    public static class Barge extends WaterTransport{
+
         public void breakdown() {
             System.out.println("Баржа тонет!");
         }
@@ -140,10 +140,7 @@ public class Domain_model {
 
         System.out.println("\n" + "Water");
         Ship titanic = new Ship();
-//        System.out.println(titanic.name);
         titanic.move();
         titanic.breakdown();
-
     }
-
 }
