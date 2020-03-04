@@ -34,24 +34,28 @@ public class Camera {
         }
 
         while(film != 0){
-            photo();
-            if(frame != (snapshot-1)){
-                System.out.println("Перемотайте");
-                if(action.equals("Перемотать")){
-                    frame += 1;
-                    System.out.println("Перемотка выполнена");
+            action = scaner.nextLine();
+            if(action.equals("Сделать снимок")){
+                photo();
+                if(frame != (snapshot-1)){
+                    System.out.println("Перемотайте");
+                    if(action.equals("Перемотать")){
+                        frame += 1;
+                        System.out.println("Перемотка выполнена");
+                    }
+                    else {
+                        System.out.println("Ну и ладно");
+                    }
                 }
-                else {
-                    System.out.println("Ну и ладно");
+                else{
+                    System.out.println(frame);
+                    rewind();
                 }
-            }
-            else{
-                rewind();
             }
         }
 
         if(frame == 10){
-            System. out.println("Замените пленку");
+            System.out.println("Замените пленку");
             action = scaner.nextLine();
             if(action.equals("Вставить пленку")){
                 film = 10;
