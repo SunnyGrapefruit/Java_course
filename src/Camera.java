@@ -31,15 +31,7 @@ public class Camera {
             if(action.equals("Сделать снимок")){
                 photo();
                 if(frame != (snapshot)){
-                    System.out.println("Перемотайте");
-                    action = scaner.nextLine();
-                    if(action.equals("Перемотать")){
-                        frame += 1;
-                        System.out.println("Перемотка выполнена");
-                    }
-                    else {
-                        System.out.println("Ну и ладно");
-                    }
+                    rewind();
                 }
                 else{
                     System.out.println("Кадров" + frame);
@@ -61,8 +53,15 @@ public class Camera {
     }
 
     public static void rewind(){
-        frame += 1;
-        System.out.println("Кадров:" + frame);
+        System.out.println("Перемотайте");
+        action = scaner.nextLine();
+        if(action.equals("Перемотать")){
+            frame += 1;
+            System.out.println("Перемотка выполнена");
+        }
+        else {
+            System.out.println("Ну и ладно");
+        }
     }
 
     public static void insert(){
