@@ -48,7 +48,6 @@ public class Camera {
     public static void photo() {
         snapshot += 1;
         film -=1;
-        System.out.println("Снимков " + snapshot + " пленки " +film);
     }
 
     public static void rewind(){
