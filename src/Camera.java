@@ -61,7 +61,7 @@ public class Camera {
         }
     }
 
-    public static void photo() {
+    public static void photo(){
         snapshot += 1;
         film -=1;
         System.out.println("Сделано снимков: " + snapshot);
@@ -77,13 +77,7 @@ public class Camera {
     }
 
     public static void insert(){
-        action = scaner.nextLine();
-        if(action.equals("Вставить пленку")){
-            film = 10;
-            System.out.println("Пленка вставлена");
-        }
-        else {
-            System.out.println("Ну и ладно");
-        }
+        film = 10;
+        System.out.println("Пленка вставлена");
     }
 }
