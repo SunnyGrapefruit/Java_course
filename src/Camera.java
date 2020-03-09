@@ -34,8 +34,7 @@ public class Camera {
                     rewind();
                 }
                 else{
-                    System.out.println("Кадров" + frame);
-                    rewind();
+                    photo();
                 }
             }
         }
