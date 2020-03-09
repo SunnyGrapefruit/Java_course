@@ -23,22 +23,16 @@ public class Camera {
 
         if(film == 0){
             System.out.println("Пленки нет");
-            action = scaner.nextLine();
-            if(action.equals("Вставить пленку")){
-                film = 10;
-                System.out.println("Пленка вставлена");
-            }
-            else {
-                System.out.println("Ну и ладно");
-            }
+            insert();
         }
 
         while(film != 0){
             action = scaner.nextLine();
             if(action.equals("Сделать снимок")){
                 photo();
-                if(frame != (snapshot-1)){
+                if(frame != (snapshot)){
                     System.out.println("Перемотайте");
+                    action = scaner.nextLine();
                     if(action.equals("Перемотать")){
                         frame += 1;
                         System.out.println("Перемотка выполнена");
@@ -48,7 +42,7 @@ public class Camera {
                     }
                 }
                 else{
-                    System.out.println(frame);
+                    System.out.println("Кадров" + frame);
                     rewind();
                 }
             }
@@ -56,35 +50,29 @@ public class Camera {
 
         if(frame == 10){
             System.out.println("Замените пленку");
-            action = scaner.nextLine();
-            if(action.equals("Вставить пленку")){
-                film = 10;
-                System.out.println("Пленка вставлена");
-            }
+            insert();
         }
     }
 
     public static void photo() {
         snapshot += 1;
         film -=1;
+        System.out.println("Снимков " + snapshot + " пленки " +film);
     }
 
     public static void rewind(){
         frame += 1;
+        System.out.println("Кадров:" + frame);
     }
 
-
-//    public static void insert(){
-//        if(film == 0){
-//            System.out.println("Пленки нет");
-//            action = scaner.nextLine();
-//            if(action.equals("Вставить пленку")){
-//                film = 10;
-//                System.out.println("Пленка вставлена");
-//            }
-//            else {
-//                System.out.println("Ну и ладно");
-//            }
-//        }
-//    }
+    public static void insert(){
+        action = scaner.nextLine();
+        if(action.equals("Вставить пленку")){
+            film = 10;
+            System.out.println("Пленка вставлена");
+        }
+        else {
+            System.out.println("Ну и ладно");
+        }
+    }
 }
