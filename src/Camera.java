@@ -44,7 +44,19 @@ public class Camera {
                 }
             }
             else if(action.equals("Перемотать")){
-                rewind();
+                if(snapshot == frame){
+                    System.out.println("Перемотку нельзя сделать без снимка");
+                    action = scaner.nextLine();
+                    if(action.equals("Сделать снимок")) {
+                        photo();
+                    }
+                    else {
+                        System.out.println("Ну и ладно");
+                    }
+                }
+                else{
+                    rewind();
+                }
             }
         }
     }
