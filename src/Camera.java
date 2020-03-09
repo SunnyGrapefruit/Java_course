@@ -29,37 +29,39 @@ public class Camera {
         while(film != 0){
             action = scaner.nextLine();
             if(action.equals("Сделать снимок")){
-                photo();
-                if(frame != (snapshot)){
-                    rewind();
+                if(frame != snapshot){
+                    System.out.println("Снимок нельзя сделать без перемотки");
+                    action = scaner.nextLine();
+                    if(action.equals("Перемотать")) {
+                        rewind();
+                    }
+                    else {
+                        System.out.println("Ну и ладно");
+                    }
                 }
                 else{
                     photo();
                 }
             }
-        }
-
-        if(frame == 10){
-            System.out.println("Замените пленку");
-            insert();
+            else if(action.equals("Перемотать")){
+                rewind();
+            }
         }
     }
 
     public static void photo() {
         snapshot += 1;
         film -=1;
+        System.out.println("Сделано снимков: " + snapshot);
+        if(snapshot == 10){
+            System.out.println("Замените пленку");
+            insert();
+        }
     }
 
     public static void rewind(){
-        System.out.println("Перемотайте");
-        action = scaner.nextLine();
-        if(action.equals("Перемотать")){
-            frame += 1;
-            System.out.println("Перемотка выполнена");
-        }
-        else {
-            System.out.println("Ну и ладно");
-        }
+        frame += 1;
+        System.out.println("Перемотка выполнена");
     }
 
     public static void insert(){
