@@ -11,13 +11,9 @@ import java.util.Scanner;
 
 public class Camera {
 
-    static Scanner scaner = new Scanner (System.in);
-
-    public static String action;
-    static int film = 0; //пленка
-    static int frame = 0; //кадр
-    static int snapshot = 0; //снимок
-
+    int film = 0; //пленка
+    int frame = 0; //кадр
+    int snapshot = 0; //снимок
 
     public static void main(String[] args){
 
@@ -29,20 +25,40 @@ public class Camera {
         camera.photo(); // не успешно, нужна перемотка
         camera.rewind(); // успешно, перемотка удалась
         camera.rewind(); // не успешно, нужно сделать фото
+        camera.photo(); // не успешно, нужна перемотка
+        camera.rewind();
+        camera.photo(); // не успешно, нужна перемотка
+        camera.rewind();
+        camera.photo(); // не успешно, нужна перемотка
+        camera.rewind();
+        camera.photo(); // не успешно, нужна перемотка
+        camera.rewind();
+        camera.photo(); // не успешно, нужна перемотка
+        camera.rewind();
+        camera.photo(); // не успешно, нужна перемотка
+        camera.rewind();
+        camera.photo(); // не успешно, нужна перемотка
+        camera.rewind();
+        camera.photo(); // не успешно, нужна перемотка
+        camera.rewind();
+        camera.photo(); // не успешно, нужна перемотка
+        camera.rewind();
+        camera.photo();
         camera.insert();
+        camera.photo();
 
     }
 
-    public static void photo(){
+    public void photo(){
         if(frame != snapshot){
             System.out.println("Снимок нельзя сделать без перемотки");
         }
         else if(film == 0){
             System.out.println("Пленки нет");
         }
-        else if(snapshot == 10){
-           System.out.println("Замените пленку");
-        }
+//        else if(snapshot == 10){
+//           System.out.println("Замените пленку");
+//        }
         else{
             snapshot += 1;
             film -=1;
@@ -50,7 +66,7 @@ public class Camera {
         }
     }
 
-    public static void rewind(){
+    public void rewind(){
         if(snapshot == frame){
             System.out.println("Перемотку нельзя сделать без снимка");
         }
@@ -60,7 +76,7 @@ public class Camera {
         }
     }
 
-    public static void insert(){
+    public void insert(){
         if(film == 0){
             film = 10;
             System.out.println("Пленка вставлена");
