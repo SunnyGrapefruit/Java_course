@@ -21,63 +21,52 @@ public class Camera {
 
     public static void main(String[] args){
 
-        if(film == 0){
-            System.out.println("Пленки нет");
-            insert();
-        }
+        Camera camera = new Camera();
+        camera.photo(); // не успешно, нужно вставить пленку
+        camera.rewind(); // не успешно, нужно вставить пленку
+        camera.insert(); // успешно, пленку вставлена
+        camera.photo(); // успешно, фото сделано
+        camera.photo(); // не успешно, нужна перемотка
+        camera.rewind(); // успешно, перемотка удалась
+        camera.rewind(); // не успешно, нужно сделать фото
+        camera.insert();
 
-        while(film != 0){
-            action = scaner.nextLine();
-            if(action.equals("Сделать снимок")){
-                if(frame != snapshot){
-                    System.out.println("Снимок нельзя сделать без перемотки");
-                    action = scaner.nextLine();
-                    if(action.equals("Перемотать")) {
-                        rewind();
-                    }
-                    else {
-                        System.out.println("Ну и ладно");
-                    }
-                }
-                else{
-                    photo();
-                }
-            }
-            else if(action.equals("Перемотать")){
-                if(snapshot == frame){
-                    System.out.println("Перемотку нельзя сделать без снимка");
-                    action = scaner.nextLine();
-                    if(action.equals("Сделать снимок")) {
-                        photo();
-                    }
-                    else {
-                        System.out.println("Ну и ладно");
-                    }
-                }
-                else{
-                    rewind();
-                }
-            }
-        }
     }
 
     public static void photo(){
-        snapshot += 1;
-        film -=1;
-        System.out.println("Сделано снимков: " + snapshot);
-        if(snapshot == 10){
-            System.out.println("Замените пленку");
-            insert();
+        if(frame != snapshot){
+            System.out.println("Снимок нельзя сделать без перемотки");
+        }
+        else if(film == 0){
+            System.out.println("Пленки нет");
+        }
+        else if(snapshot == 10){
+           System.out.println("Замените пленку");
+        }
+        else{
+            snapshot += 1;
+            film -=1;
+            System.out.println("Сделано снимков: " + snapshot);
         }
     }
 
     public static void rewind(){
-        frame += 1;
-        System.out.println("Перемотка выполнена");
+        if(snapshot == frame){
+            System.out.println("Перемотку нельзя сделать без снимка");
+        }
+        else{
+            frame += 1;
+            System.out.println("Перемотка выполнена");
+        }
     }
 
     public static void insert(){
-        film = 10;
-        System.out.println("Пленка вставлена");
+        if(film == 0){
+            film = 10;
+            System.out.println("Пленка вставлена");
+        }
+        else{
+            System.out.println("Пленку нельзя вставить");
+        }
     }
 }
