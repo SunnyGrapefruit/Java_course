@@ -1,0 +1,40 @@
+1
+adress1 = find_element_by_name("adress1")
+adress2 = find_element_by_name("adress2")
+phone = find_element_by_name("phone")
+order = find_element_by_name("order")
+
+
+void adress{
+    adress1.send_keys("")
+    order.click()
+    if get.message("Некорректный адрес"):
+        return("good")
+    adress1.send_keys("Ленина 24")
+    adress2.send_keys("")
+    order.click()
+    if get.message("Некорректный телефон"):
+        return("good")
+    phone.send_keys("+78945612310")
+    order.click()
+}
+
+
+void confirm{
+    timeouts(30)
+    code = find_element_by_name("code")
+    code.send_keys("123")
+    confirm = find_element_by_name("confirm")
+    confirm.click()
+    if get.message("Заказ принят"):
+        return("good")
+}
+
+void cancel{
+    code = find_element_by_name("code")
+    code.send_keys("123")
+    cancel = find_element_by_name("cancel")
+    cancel.click()
+    if get.message("Заказ принят"):
+        return("good")
+}
