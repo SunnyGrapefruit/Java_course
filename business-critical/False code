@@ -1,11 +1,6 @@
-1
-adress1 = find_element_by_name("adress1")
-adress2 = find_element_by_name("adress2")
-phone = find_element_by_name("phone")
-order = find_element_by_name("order")
-
-
 void adress_first(arg){
+    adress1 = find_element_by_name("adress1")
+    order = find_element_by_name("order")
     adress1.send_keys(arg)
     order.click()
     if get.message("Укажите адрес") && arg is null:
@@ -17,6 +12,8 @@ void adress_first(arg){
 }
 
 void adress_second(arg){
+    adress2 = find_element_by_name("adress2")
+    order = find_element_by_name("order")
     adress2.send_keys(arg)
     order.click()
     if get.message("Корректный адрес") && arg is not null && adress_first(arg) != "test passed":
@@ -26,7 +23,9 @@ void adress_second(arg){
 }
 
 void phone(arg){
+    phone = find_element_by_name("phone")
     phone.send_keys(arg)
+    order = find_element_by_name("order")
     order.click()
     if get.message("Некорректный телефон") && (arg is null || arg != mask):
         return("test passed")
