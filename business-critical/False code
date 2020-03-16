@@ -5,7 +5,7 @@ phone = find_element_by_name("phone")
 order = find_element_by_name("order")
 
 
-void adress{
+void adress1{
     adress1.send_keys("")
     order.click()
     if get.message("Некорректный адрес"):
@@ -19,8 +19,30 @@ void adress{
     order.click()
 }
 
+void adress(arg){
+    adress1.send_keys(arg)
+    order.click()
+    if get.message("Укажите адрес") && arg is null:
+        return("test passed")
+    elif get.message("Корректный адрес") && arg is null:
+        return("test failed")
+    elif get.message("Корректный адрес") && arg is not null:
+        return("test passed")
+}
 
-void confirm{
+void phone(arg){
+    phone.send_keys(arg)
+    order.click()
+    if get.message("Некорректный телефон") && (arg is null || arg != mask):
+        return("test passed")
+    elif get.message("Корректный телефон") && (arg is null || arg != mask):
+        return("test failed")
+    elif get.message("Корректный телефон") && (arg is not null || arg == mask):
+        return("test passed")
+}
+
+
+void confirm(arg){
     timeouts(30)
     code = find_element_by_name("code")
     code.send_keys("123")
