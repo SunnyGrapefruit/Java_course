@@ -5,21 +5,7 @@ phone = find_element_by_name("phone")
 order = find_element_by_name("order")
 
 
-void adress1{
-    adress1.send_keys("")
-    order.click()
-    if get.message("Некорректный адрес"):
-        return("good")
-    adress1.send_keys("Ленина 24")
-    adress2.send_keys("")
-    order.click()
-    if get.message("Некорректный телефон"):
-        return("good")
-    phone.send_keys("+78945612310")
-    order.click()
-}
-
-void adress(arg){
+void adress_first(arg){
     adress1.send_keys(arg)
     order.click()
     if get.message("Укажите адрес") && arg is null:
@@ -27,7 +13,16 @@ void adress(arg){
     elif get.message("Корректный адрес") && arg is null:
         return("test failed")
     elif get.message("Корректный адрес") && arg is not null:
-        return("test passed")
+        return("test correct")
+}
+
+void adress_second(arg){
+    adress2.send_keys(arg)
+    order.click()
+    if get.message("Корректный адрес") && arg is not null && adress_first(arg) != "test passed":
+        return("test failed")
+    elif get.message("Корректный адрес") && arg is not null && adress_first(arg) == "test passed":
+        return("test correct")
 }
 
 void phone(arg){
@@ -37,26 +32,30 @@ void phone(arg){
         return("test passed")
     elif get.message("Корректный телефон") && (arg is null || arg != mask):
         return("test failed")
-    elif get.message("Корректный телефон") && (arg is not null || arg == mask):
-        return("test passed")
+    elif get.message("Корректный телефон") && arg == mask):
+        return("test correct")
 }
 
 
 void confirm(arg){
     timeouts(30)
     code = find_element_by_name("code")
-    code.send_keys("123")
+    code.send_keys(arg)
     confirm = find_element_by_name("confirm")
     confirm.click()
-    if get.message("Заказ принят"):
-        return("good")
+    if get.message("Неверный код") && (arg is null || arg != mask):
+            return("test passed")
+        elif get.message("Заказ принят") && (arg is null || arg != mask):
+            return("test failed")
+        elif get.message("Заказ принят") && arg == mask:
+            return("test correct")
 }
 
 void cancel{
-    code = find_element_by_name("code")
-    code.send_keys("123")
     cancel = find_element_by_name("cancel")
     cancel.click()
-    if get.message("Заказ принят"):
-        return("good")
+    if get.message("Заказ отменен"):
+        return("test correct")
+    else:
+        return("test failed")
 }
