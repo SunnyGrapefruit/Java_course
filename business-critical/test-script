@@ -4,12 +4,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class RegistrationPage {
+public class YandexTaxi {
 
     private static String URL_MATCH = "registration";
-
     private WebDriver driver;
-
 
     @FindBy(id = "adressFrom")
     private WebElement adressFrom;
@@ -30,7 +28,7 @@ public class RegistrationPage {
     private WebElement phoneError;
 
 
-    public RegistrationPage(WebDriver driver) {
+    public YandexTaxi(WebDriver driver) {
         // проверить, что вы находитесь на верной странице
         if (!driver.getCurrentUrl().contains(URL_MATCH)) {
             throw new IllegalStateException(
@@ -46,11 +44,9 @@ public class RegistrationPage {
      * @param adress - {@link Adress}
      */
     private void inputAdress(Adress adress) {
-        System.out.println(driver.getTitle());
         adressFrom.sendKeys(adress.adressFrom);
         adressTo.sendKeys(adress.adressTo);
         phoneNumber.sendKeys(adress.phoneNumber);
-
         callTaxi.click();
     }
 
@@ -79,35 +75,54 @@ public class RegistrationPage {
      * @param user - {@link User}
      * @return {@link RegistrationPage}
      */
-    public RegistrationPage checkErrorMessage(String errorMessage) {
+    public AdressForm checkAdressErrorMessage(String errorMessage) {
         Assert.assertTrue("Error message should be present",
-                registerError.isDisplayed());
+                adressError.isDisplayed());
         Assert.assertTrue("Error message should contains " + errorMessage,
-                registerError.getText().contains(errorMessage));
+                adressError.getText().contains(errorMessage));
         return this;
     }
+
+    public AdressForm checkPhoneErrorMessage(String errorMessage) {
+        Assert.assertTrue("Error message should be present",
+                phoneError.isDisplayed());
+        Assert.assertTrue("Error message should contains " + errorMessage,
+                phoneError.getText().contains(errorMessage));
+        return this;
+    }
+
 }
 
 
+@Test
+public void registerUserTest() {
+    driver.get("http://HOST_NAME/registration");
+
+    Order order = Order.createValidOrder();
+    order.adress = "not_valid_adress";
+
+    YandexTaxi newOrder =  new YandexTaxi(driver);
+    newOrder
+            .callTaxiError(order)
+            .checkAdressErrorMessage(errorMessage)
+    ;
 
 
-    @Test
-    public void registerUserTest() {
-        driver.get("http://HOST_NAME/registration");
-        User user = User.createValidUser();
-        user.email = "not_valid_email";
+    Order order = Order.createValidOrder();
+    order.phone = "not_valid_phone";
 
-        RegistrationPage registrationPage =  new RegistrationPage(driver);
-        registrationPage
-                .registerUserError(user)
-                .checkErrorMessage(errorMessage)
-        ;
+    YandexTaxi newOrder =  new YandexTaxi(driver);
+    newOrder
+            .callTaxiError(order)
+            .checkPhoneErrorMessage(errorMessage)
+    ;
 
-        user = User.createValidUser();
 
-        registrationPage
-                .registerUserSuccess(user)
+    Order order = Order.createValidUser();
+    YandexTaxi newOrder =  new YandexTaxi(driver);
+    newOrder
+            .callTaxiSuccess(order)
         // ...
         // вызов методов HomePage
-        ;
-    }
+    ;
+}
