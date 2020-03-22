@@ -1,6 +1,7 @@
 Yandex Taxi
 
 Инструмент - Selenium WebDriver - в связи с кроссбраузерностью и наибольшим рапространением
+Библиотека для Selenium - PageFactory, так как выбран паттерн Page object
 Отчет - Allure
 
 business-critical функционал
