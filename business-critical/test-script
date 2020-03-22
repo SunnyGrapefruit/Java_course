@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class YandexTaxi {
+public class AdressForm {
 
     private static String URL_MATCH = "registration";
     private WebDriver driver;
@@ -28,7 +28,7 @@ public class YandexTaxi {
     private WebElement phoneError;
 
 
-    public YandexTaxi(WebDriver driver) {
+    public AdressForm(WebDriver driver) {
         // проверить, что вы находитесь на верной странице
         if (!driver.getCurrentUrl().contains(URL_MATCH)) {
             throw new IllegalStateException(
@@ -101,7 +101,7 @@ public void registerUserTest() {
     Order order = Order.createValidOrder();
     order.adress = "not_valid_adress";
 
-    YandexTaxi newOrder =  new YandexTaxi(driver);
+    AdressForm newOrder =  new AdressForm(driver);
     newOrder
             .callTaxiError(order)
             .checkAdressErrorMessage(errorMessage)
@@ -111,7 +111,7 @@ public void registerUserTest() {
     Order order = Order.createValidOrder();
     order.phone = "not_valid_phone";
 
-    YandexTaxi newOrder =  new YandexTaxi(driver);
+    AdressForm newOrder =  new AdressForm(driver);
     newOrder
             .callTaxiError(order)
             .checkPhoneErrorMessage(errorMessage)
@@ -119,7 +119,7 @@ public void registerUserTest() {
 
 
     Order order = Order.createValidUser();
-    YandexTaxi newOrder =  new YandexTaxi(driver);
+    AdressForm newOrder =  new AdressForm(driver);
     newOrder
             .callTaxiSuccess(order)
         // ...
