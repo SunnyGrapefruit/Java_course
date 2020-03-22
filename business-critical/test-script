@@ -19,7 +19,7 @@ public class AdressForm {
     private WebElement phoneNumber;
 
     @FindBy(id = "callTaxi")
-    private WebElement callTaxi;
+    private WebElement submitTaxi;
 
     @FindBy(id = "error-message-adress")
     private WebElement adressError;
@@ -47,7 +47,7 @@ public class AdressForm {
         adressFrom.sendKeys(adress.adressFrom);
         adressTo.sendKeys(adress.adressTo);
         phoneNumber.sendKeys(adress.phoneNumber);
-        callTaxi.click();
+        submitTaxi.click();
     }
 
     /**
@@ -90,13 +90,88 @@ public class AdressForm {
                 phoneError.getText().contains(errorMessage));
         return this;
     }
+}
+
+public class ConfirmForm{
+
+    @FindBy(id = "confirmCode")
+    private WebElement confirmCode;
+
+    @FindBy(id = "confirmButton")
+    private WebElement confirmButton;
+
+    @FindBy(id = "tryAgainCode")
+    private WebElement tryAgainCode;
+
+    @FindBy(id = "cancelButton")
+    private WebElement cancelButton;
+
+    private void inputCode(Code code) {
+        confirmCode.sendKeys(adress.adressFrom);
+        confirmButton.click();
+    }
+
+    private void cancelTaxi{
+        cancelButton.click();
+    }
+
+
+    /**
+     * Успешный ввод кода
+     * @param adress - {@link Adress}
+     * @return {@link ConfirmForm}
+     */
+    public ConfirmForm callTaxiSuccess(Code code) {
+        inputCode(adress);
+        return new ConfirmForm(driver);
+    }
+
+    /**
+     * Неуспешный ввод кода
+     * @param adress - {@link Adress}
+     * @return {@link AdressForm}
+     */
+    public ConfirmForm callTaxiError(Code code) {
+        inputCode(adress);
+        return AuthorizationErrorForm;
+    }
+
+    /**
+     * Отмена такси
+     * @param adress - {@link Adress}
+     * @return {@link AdressForm}
+     */
+
+    public ConfirmForm cancelTaxi(Code code){
+        cancelTaxi(code);
+        return AdressForm(driver);
+    }
+
+}
+
+public class AuthorizationErrorForm{
+
+    @FindBy(id = "updatePage")
+    private WebElement updatePageButton;
+
+    @FindBy(id = "closePage")
+    private WebElement closePageButton;
+
+    private void updatePage(Code code) {
+        updatePageButton.click();
+    }
+
+    private void closePage(Code code) {
+        closePageButton.click();
+    }
 
 }
 
 
+
 @Test
 public void registerUserTest() {
-    driver.get("http://HOST_NAME/registration");
+    driver.get("https://taxi.yandex.ru/#index");
 
     Order order = Order.createValidOrder();
     order.adress = "not_valid_adress";
