@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class AdressForm {
+public class OrderForm {
 
     private static String URL_MATCH = "registration";
     private WebDriver driver;
@@ -28,7 +28,7 @@ public class AdressForm {
     private WebElement phoneError;
 
 
-    public AdressForm(WebDriver driver) {
+    public OrderForm(WebDriver driver) {
         // проверить, что вы находитесь на верной странице
         if (!driver.getCurrentUrl().contains(URL_MATCH)) {
             throw new IllegalStateException(
@@ -63,11 +63,11 @@ public class AdressForm {
     /**
      * Неуспешный ввод адреса
      * @param adress - {@link Adress}
-     * @return {@link AdressForm}
+     * @return {@link OrderForm}
      */
-    public AdressForm callTaxiError(Adress adress) {
+    public OrderForm callTaxiError(Adress adress) {
         inputAdress(adress);
-        return new AdressForm(driver);
+        return new OrderForm(driver);
     }
 
     /**
@@ -75,7 +75,7 @@ public class AdressForm {
      * @param user - {@link User}
      * @return {@link RegistrationPage}
      */
-    public AdressForm checkAdressErrorMessage(String errorMessage) {
+    public OrderForm checkAdressErrorMessage(String errorMessage) {
         Assert.assertTrue("Error message should be present",
                 adressError.isDisplayed());
         Assert.assertTrue("Error message should contains " + errorMessage,
@@ -83,7 +83,7 @@ public class AdressForm {
         return this;
     }
 
-    public AdressForm checkPhoneErrorMessage(String errorMessage) {
+    public OrderForm checkPhoneErrorMessage(String errorMessage) {
         Assert.assertTrue("Error message should be present",
                 phoneError.isDisplayed());
         Assert.assertTrue("Error message should contains " + errorMessage,
@@ -129,7 +129,7 @@ public class ConfirmForm{
     /**
      * Неуспешный ввод кода
      * @param adress - {@link Adress}
-     * @return {@link AdressForm}
+     * @return {@link OrderForm}
      */
     public ConfirmForm callTaxiError(Code code) {
         inputCode(adress);
@@ -139,12 +139,12 @@ public class ConfirmForm{
     /**
      * Отмена такси
      * @param adress - {@link Adress}
-     * @return {@link AdressForm}
+     * @return {@link OrderForm}
      */
 
     public ConfirmForm cancelTaxi(Code code){
         cancelTaxi(code);
-        return AdressForm(driver);
+        return OrderForm(driver);
     }
 
 }
@@ -152,17 +152,17 @@ public class ConfirmForm{
 public class AuthorizationErrorForm{
 
     @FindBy(id = "updatePage")
-    private WebElement updatePageButton;
+    private WebElement updateButton;
 
-    @FindBy(id = "closePage")
-    private WebElement closePageButton;
+    @FindBy(id = "closeForm")
+    private WebElement closeButton;
 
     private void updatePage(Code code) {
-        updatePageButton.click();
+        updateButton.click();
     }
 
-    private void closePage(Code code) {
-        closePageButton.click();
+    private void closeForm(Code code) {
+        closeButton.click();
     }
 
 }
@@ -176,7 +176,7 @@ public void registerUserTest() {
     Order order = Order.createValidOrder();
     order.adress = "not_valid_adress";
 
-    AdressForm newOrder =  new AdressForm(driver);
+    OrderForm newOrder =  new OrderForm(driver);
     newOrder
             .callTaxiError(order)
             .checkAdressErrorMessage(errorMessage)
@@ -186,7 +186,7 @@ public void registerUserTest() {
     Order order = Order.createValidOrder();
     order.phone = "not_valid_phone";
 
-    AdressForm newOrder =  new AdressForm(driver);
+    OrderForm newOrder =  new OrderForm(driver);
     newOrder
             .callTaxiError(order)
             .checkPhoneErrorMessage(errorMessage)
@@ -194,7 +194,7 @@ public void registerUserTest() {
 
 
     Order order = Order.createValidUser();
-    AdressForm newOrder =  new AdressForm(driver);
+    OrderForm newOrder =  new OrderForm(driver);
     newOrder
             .callTaxiSuccess(order)
         // ...
